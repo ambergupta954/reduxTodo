@@ -5,7 +5,7 @@ import { StyleSheet, Text, View,TouchableOpacity} from 'react-native';
 export default function Todo(props) {
   return (
     <TouchableOpacity style={styles.container} onPress={props.toggleTodo(props.id)}>
-     <Text style={props.completed? styles.textDone : styles.text }>{props.text}</Text>
+      <Text style={props.completed? styles.textDone : styles.text }>{props.text}</Text>
     </TouchableOpacity>
   );
 }

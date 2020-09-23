@@ -2,23 +2,37 @@ import { StatusBar } from 'expo-status-bar';
 import React, { Component } from 'react';
 import { Navigation } from "react-native-navigation";
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import Todo from './Todo'
-import {connect} from 'react-redux'
+import Todo from '../components/Todo'
 import { render } from 'react-dom';
 
 class Home extends Component {
-  
    state={
-     todos:[]
+     todos:[],
+     filter:'SHOW_ALL'
    }
+   goToCreateTodo=()=>{
+    Navigation.push(this.props.componentId, {
+        component: {
+          name: 'CreateTodo',
+          options: {
+            topBar: {
+              title: {
+                text: 'CreateTodo'
+              }
+            }
+          }
+        }
+      }
+    )
+}
     
     render(){
-      let { goToCreateTodo} = this.props
+      
       let { todos } = this.state
       return (
         <View style={styles.container}>
             <View style={styles.addtodoContainer}>
-                <TouchableOpacity style={styles.addTodo} onPress={goToCreateTodo} >
+                <TouchableOpacity style={styles.addTodo}  onPress={this.goToCreateTodo}>
                     <Text style={styles.addTodoText}>+</Text>
                 </TouchableOpacity>
             </View>
@@ -36,13 +50,8 @@ class Home extends Component {
     }
   
 }
-const mapStateToProps = state =>({
-  todos: state
-})
-const mapDispatchToProps = dispatch =>({
-  togggleTodo: id => dispatch({type:'TOGGLE_TODO',id})
-})
-export default connect(mapStateToProps,mapDispatchToProps)(Home)
+
+export default Home
 
 const styles = StyleSheet.create({
     container: {

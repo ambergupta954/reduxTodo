@@ -1,39 +1,21 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
-import {connect} from 'react-redux'
 
-class CreateTodo extends Component {
 
-    state = {
-        text:''
-    }
-    addTodo=(text)=>{
-        this.props.dispatch({type:'ADD_TODO', text })
-        this.setState({text:''})
-        console.log('called')
-    }
+class EditTodo extends Component {
 
     render() {
-        let { text }= this.state
         return (
             <View style={styles.container}>
-                <TextInput
-                    onChangeText={(text)=>{this.setState({text})}}
-                    style={styles.input}
-                    placeholder="create a new todo"
-                />
-                <TouchableOpacity style={styles.button} onPress={this.addTodo(text)}>
-                    <Text style={styles.text}>
-                        ADD TODO
-            </Text>
-                </TouchableOpacity>
+                <Text>Edit Todo</Text>
             </View>
         );
     }
 
 }
-export default connect()(CreateTodo);
+
+export default EditTodo;
 
 const styles = StyleSheet.create({
     container: {
@@ -66,10 +48,10 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1
     }
 });
-CreateTodo.options = {
+EditTodo.options = {
     topBar: {
         title: {
-            text: 'create todo',
+            text: 'Edit todo',
             color: 'white'
         },
         backButton: {

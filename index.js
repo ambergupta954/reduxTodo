@@ -1,12 +1,13 @@
 
 import { Navigation } from "react-native-navigation";
-import App from './App';
-import CreateTodo from './screens/CreateTodo';
-
+import CreateTodo from './src/screens/CreateTodo';
+import Home from './src/screens/Home'
+import { registeredScreen } from './screens'
 // registerRootComponent calls AppRegistry.registerComponent('main', () => App);
 // It also ensures that whether you load the app in the Expo client or in a native build,
 // the environment is set up appropriately
-Navigation.registerComponent('com.myApp.WelcomeScreen', () => App);
+
+registeredScreen()
 
 Navigation.events().registerAppLaunchedListener(() => {
     Navigation.setRoot({
@@ -15,7 +16,7 @@ Navigation.events().registerAppLaunchedListener(() => {
                 children: [
                     {
                         component: {
-                            name: 'com.myApp.WelcomeScreen'
+                            name: 'Home'
                         }
                     }
                 ]
@@ -23,4 +24,4 @@ Navigation.events().registerAppLaunchedListener(() => {
         }
     });
 });
-Navigation.registerComponent('CreateTodo',() => CreateTodo);
+
