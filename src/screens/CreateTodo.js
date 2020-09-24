@@ -2,11 +2,13 @@ import { StatusBar } from 'expo-status-bar';
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
 import { Navigation } from "react-native-navigation";
+import { connect } from 'redux';
+import { addTodo } from '../redux/actions.js'
 
 class CreateTodo extends Component {
 
     state = {
-        text:''
+        todo: ''
     }
     goToHome=()=>{
         Navigation.push(this.props.componentId, {
@@ -25,15 +27,20 @@ class CreateTodo extends Component {
     }
     
     render() {
-        let { text }= this.state
+        let { todo } =this.state
         return (
             <View style={styles.container}>
                 <TextInput
-                    onChangeText={(text)=>{this.setState({text})}}
+                    value={todo}
+                    onChangeText={(todo)=>{this.setState({todo})}}
                     style={styles.input}
                     placeholder="create a new todo"
                 />
-                <TouchableOpacity style={styles.button} onPress={this.goToHome}>
+                <TouchableOpacity style={styles.button} onPress={()=>{
+                    this.props.add(todo)
+                    this.setState({todo: ''})
+                    this.goToHome
+                }}>
                     <Text style={styles.text}>
                         ADD TODO
                     </Text>
@@ -43,8 +50,19 @@ class CreateTodo extends Component {
     }
 
 }
+const mapStateToProps=(state)=>{
+ console.log(state);
+ return {
+     todos: state.todos
+ }
+}
+const mapDispatchToProps = (dispatch)=>{
+    return{
+        add: (todo) => dispatch(addTodo(todo))
+    }
+}
 
-export default CreateTodo;
+export default connect(mapStateToProps, mapDispatchToProps)(CreateTodo);
 
 const styles = StyleSheet.create({
     container: {

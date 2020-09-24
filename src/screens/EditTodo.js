@@ -4,7 +4,6 @@ import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-nativ
 
 
 class EditTodo extends Component {
-
     render() {
         return (
             <View style={styles.container}>
@@ -12,7 +11,6 @@ class EditTodo extends Component {
             </View>
         );
     }
-
 }
 
 export default EditTodo;
